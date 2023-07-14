@@ -1,6 +1,9 @@
-###
-Repository of sample log files for log analysis
+### Sample Log files 
 
-This folder is for throw away scripts used to generate sample logs files.
-Purpose of putting the script is that they may be useful "just in case".
-If needed, Please copy these scripts, modify them and use as and when needed.
+Repository of sample log files for log analysis using Liten tools
+
+This is the structure of the files.
+* example contains an example liten data file
+
+dotenv file should be copied to .env file and replaced with correct value
+
