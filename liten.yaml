@@ -1,0 +1,5 @@
+# OpenAI API key to for API calls
+"OPENAI_API_KEY" : "<insert your litenkey here>"
+# Spark local IP where  master is running. If local do local[1] or 
+"SPARK_MASTER_URL" : "local[2]"
+
