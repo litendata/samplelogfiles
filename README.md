@@ -7,3 +7,4 @@ This is the structure of the files.
 
 It also contains an example liten.yaml file needed for liten pacakge
 
+litenlakehouse.py is used to load all files into a spark table catalog.
