@@ -17,5 +17,3 @@ spark:
 liten:
   # Liten Datalake URL - assumes litenlakehouse.py is here for file scheme
   lakehouse_url: "/content/samplelogfiles/"
-  # log file path
-  _log_file: "/content/litenai.log"
