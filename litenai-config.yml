@@ -10,10 +10,10 @@ openai:
   api_key: "<use OpenAI key here>"
 spark:
   # Spark connect mode - local or remote
-  connect_mode : "local" # "remote"  # local or remote
+  connect_mode : "local" # local or remote
   # Spark local IP where  master is running, do local[n] for n threaded master
   # Spark remote URL where master is running is like sc://localhost:15002 for spark-connect-server
-  connect_url : "local[*]" #"sc://localhost:15002"
+  connect_url : "local[*]" 
 liten:
   # Liten Datalake URL - assumes litenlakehouse.py is here for file scheme
-  lakehouse_url: "/content/samplelogfiles/"
+  lakehouse_url: "file:///content/samplelogfiles/"
