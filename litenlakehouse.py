@@ -16,7 +16,7 @@ class LitenLakehouse:
     Liten DemoFiles - Load demo files as a table from csv file
     """
     def __init__(self,
-                 spark : SparkSession, 
+                 spark : SparkSession,
                  liten_data_dir : str) -> None:
         """
         Create and initialize Liten Cache
@@ -27,7 +27,7 @@ class LitenLakehouse:
         self._syslog = 'syslog'
         self._emailserviceaccesslog = 'emailaccesslog'
         self._ipnetlog = 'ipnetlog'
-        self._data_files = {self._weblog: [self._data_dir+"webserverlog_simple.log"],  
+        self._data_files = {self._weblog: [self._data_dir+"webserverlog_simple.log"],
                             self._syslog: [self._data_dir+"linuxsystemlog_simple.log"],
                             self._emailserviceaccesslog: [self._data_dir+"emailservice_access.log"],
                             self._ipnetlog: [self._data_dir+"sample_http_ipdata.json"] }
@@ -73,7 +73,7 @@ class LitenLakehouse:
     def init_emailaccesslog(self):
         """
         For now read csv, in future needs to be a database table
-        csv file which has access logs of a email service. 
+        csv file which has access logs of a email service.
         Sample line. For more examples, look in samplelogfiles directory.
         2023-05-30 15:49:43,309,imap,machine291.dovecotservice.africa.mail.emailcompany.com,5077 ,14 ,202,[markasspam],/message/scan/id=messagehash6pgp5x598e ,hashun5xjw6zwrdbd ,60 ,[missingmailbox] ,inaccessible file ,bad encoding,74.229.170.153
         service, host, payload, latency, status, API, Q, reqId, CPULatency, ec, EC2, exception, clientIp
@@ -125,7 +125,7 @@ class LitenLakehouse:
         # extended ietf format:
         #  timestamp hostname process[pid]: message header message
         # example
-        #  Jun 14 15:16:01 combo sshd(pam_unix)[19939]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4 
+        #  Jun 14 15:16:01 combo sshd(pam_unix)[19939]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4
         # convert to a csv file like this first
         #  timestamp,hostname,process,pid,message
         # example
@@ -139,7 +139,7 @@ class LitenLakehouse:
             while log_line:
                 log_line = log_line.strip()
                 # Read log line and convert to csv format
-                # sample log: Jun 14 15:16:01 combo sshd(pam_unix)[19939]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4 
+                # sample log: Jun 14 15:16:01 combo sshd(pam_unix)[19939]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4
                 # output csv: Jun 14 15:16:01|combo|sshd(pam_unix)|19939|authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=218.188.2.4
                 log = re.findall("([\w]+\s+[0-9]+\s+[0-9:]+)\s+([\w]+)\s+([\w\(\)\-\.\s]+)\[([0-9]+)\]\:\s*(.*)",log_line)
                 if len(log)>0:
@@ -147,7 +147,7 @@ class LitenLakehouse:
                     syslog_csv.write('|'.join(f)+'\n')
                 else:
                     # Try another log line format with no pid
-                    # sample log: Jun 15 04:06:20 combo logrotate: ALERT exited abnormally with [1] 
+                    # sample log: Jun 15 04:06:20 combo logrotate: ALERT exited abnormally with [1]
                     # output csv: Jun 15 04:06:20|combo|logrotate||ALERT exited abnormally with [1]
                     log = re.findall("([\w]+\s+[0-9]+\s+[0-9:]+)\s+([\w]+)\s+([\w\s\.\-\(\)]+)\:\s*(.*)",log_line)
                     if len(log)>0:
@@ -160,7 +160,7 @@ class LitenLakehouse:
             syslog_file.close()
             syslog_csv.close()
             if skips>0:
-                print(f"skipped {skips} lines") 
+                print(f"skipped {skips} lines")
             return csv_file
         # Create schema and table now
         # TBD need a generic timestamp converter for the two given formats like -
@@ -212,6 +212,3 @@ class LitenLakehouse:
                 F.to_timestamp(F.col("""frame_time_epoch""")/(1000*1000*1000)))
         ipnetlog_dfs_time.createOrReplaceTempView(self._ipnetlog)
         return
-        
-        
-
