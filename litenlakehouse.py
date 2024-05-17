@@ -32,13 +32,6 @@ class LitenLakehouse:
                             self._emailserviceaccesslog: [self._data_dir+"emailservice_access.log"],
                             self._ipnetlog: [self._data_dir+"sample_http_ipdata.json"] }
         self._time_field = 'time'
-        self._debug = False #modify this flag to enable verbose mode.
-
-    def init(self):
-        """
-        Initialize Liten DemoFiles if not already initialized.
-        Should be called only once. Used for demo purposes.
-        """
         self.init_weblog()
         self.init_linux_syslog()
         self.init_emailaccesslog()
